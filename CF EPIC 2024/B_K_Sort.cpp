@@ -1,37 +1,41 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #define ll long long
 using namespace std;
-void solve(){
-        
+void solve()
+{
 }
-int main(){
-int t;
-cin>>t;
-while(t--){
-int n;
-cin>>n;
- vector<ll>a(n);
- for(int i=0;i<n;i++){
- cin>>a[i];
- }
- ll t=a[0];
- vector<ll>b(n);
- for(int i=1;i<n;i++){
-  t=max(t,a[i]);
-  if(t>a[i]){
-    b.push_back(t-a[i]);
-
+int main()
+{
+  int t;
+  cin >> t;
+  while (t--)
+  {
+    int n;
+    cin >> n;
+    vector<ll> a(n);
+    for (int i = 0; i < n; i++)
+    {
+      cin >> a[i];
+    }
+    map<int, int> mp;
+    int tot = 0; // How many values need to be increased
+    for (int i = 1; i < n; i++)
+    {
+      if (a[i] < a[i - 1])
+      {
+        mp[a[i - 1] - a[i]]++;
+        tot++;
+        a[i] = a[i - 1];
+      }
+    } // O(nlogn)
+    int ans = 0, x = 0;
+    for (auto p : mp)
+    {
+      ans += (p.first - x) * (tot + 1);
+      tot -= p.second; // Removing the elements for which the difference has become 0
+      x = p.first;     // updating least difference
+    } // O(n)
+    cout << ans << '\n';
   }
- }
- sort(b.begin(),b.end());
- ll res=b[b.size()-1];
- ll m=b.size();
- ll p=0;
- for(int i=0;i<m;i++){
-  res+=(b[i]-p)*(m-i);
-  p=b[i];
- }
- cout<<res<<endl;
-}
-return 0;
+  return 0;
 }

@@ -14,11 +14,12 @@ vector<ll>h(n);
 for(ll i=0; i<n; i++){
 cin>>h[i];
 }
-ll ans=0;
-for(ll i=n-1;i>=0;i--){
-    ans=max(ans,h[i]+i);
+ll ans=h[n-1];
+for(ll i=n-2;i>=0;i--){
+    ans=max(ans+1,h[i]);
 }
 cout<<ans<<endl;
 }
 return 0;
 }
+
